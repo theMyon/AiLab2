@@ -26,6 +26,16 @@ struct GameState
 };
 
 //This is a comment
+double howClose(std::pair<double,double> distribution, double measurement)
+{
+	measurement = measurement - distribution.first; //distribution.first=mean
+	if (measurement < 0)
+	{
+		measurement = -1*measurement;
+	}
+	measurement = measurement/distribution.second; //distribution.second=std
+	return measurement;
+}
 
 int main()
 {
