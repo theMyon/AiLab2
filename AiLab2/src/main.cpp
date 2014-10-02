@@ -96,7 +96,12 @@ int main()
 
 			// After predicting the Crocs location and where the Croc is moving,
 			// make moves (2 moves per 1 Croc/backpacker move)
-			//crocSession->makeMove(playerMove, playerMove2, outScore);
+			if (!crocSession->makeMove(playerMove, playerMove2, outScore))
+			{
+				// Croc was found, game ends
+				gameIsRunning = false;
+				numGamesFinished++;
+			}
 		}
 	}
 
