@@ -25,7 +25,27 @@ struct GameState
 	{}
 };
 
-//This is a comment, nope
+int viterbi(std::vector<std::pair<double,double>> calciumDist, 
+			std::vector<std::pair<double,double>> salinityDist, 
+			std::vector<std::pair<double,double>> alkalinityDist,
+			double calciumReading,
+			double salineReading,
+			double alkalinityReading)
+{
+	int nr = calciumDist.size();
+	std::vector<double> plaus(nr, -1);
+	for (int i = 0; i < nr; i++)
+	{
+		plaus[i] = howClose(calciumDist[i], calciumReading);
+		plaus[i] = plaus[i]*howClose(salinityDist[i], salineReading);
+		plaus[i] = plaus[i]*howClose(alkalinityDist[i], alkalinityReading);
+		plaus[i] = 1/plaus[i];
+		std::cout << plaus[i] << std::endl;
+	}
+
+}
+
+
 double howClose(std::pair<double,double> distribution, double measurement)
 {
 	measurement = measurement - distribution.first; //distribution.first=mean
